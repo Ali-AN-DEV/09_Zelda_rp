@@ -11,8 +11,8 @@ const button2 = document.querySelector("#button2");
 const button3 = document.querySelector("#button3");
 const text = document.querySelector("#text");
 const textXp = document.querySelector("#xpText");
-const textVida = document.querySelector("#healthText");
-const textRupias = document.querySelector("#goldText");
+const textVida = document.querySelector("#vidaText");
+const rupiasText = document.querySelector("#rupiasText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
@@ -83,7 +83,7 @@ function buyHealth() {
   if(rupias >= 10) {
     vida += 10; 
     rupias -= 10; 
-    textRupias.innerText = rupias; 
+    rupiasText.innerText = rupias; 
     textVida.innerText = vida; 
   } else {
     text.innerText = "No tienes suficientes rupias"; 
@@ -92,11 +92,11 @@ function buyHealth() {
   
 function buyWeapon() {
   if (currentWeaponIndex < armas.length - 1) {  //si aun no tienes la última y mejor arma, espada maestra
-    if (rupas >= 30) {
+    if (rupias >= 30) {
       rupias -= 30; 
       currentWeaponIndex++; 
-      textRupias.innerText = rupias; 
-      let nuevaArma = arma[currentWeaponIndex].name; 
+      rupiasText.innerText = rupias; 
+      let nuevaArma = armas[currentWeaponIndex].name; 
       inventory.push(nuevaArma);//introducimos la nueva arma en el inventario para luego mostrarla por el text 
       text.innerText += " En tu inventario tienes: " + inventory; 
     } else {
@@ -114,4 +114,4 @@ function vsBoko () {
 
 function vsMoblin () {
 
-}; 
+};
