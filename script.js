@@ -1,6 +1,3 @@
-let hp = 10; 
-let barra = document.getElementById("healthbar").value = hp; 
-
 let xp = 0;
 let vida= 100;
 let rupias = 50;
@@ -34,7 +31,7 @@ const locations = [ //objeto, fijate como en el interior tiene keys : ...; si la
         text: "You are in the town square. You see a sign that says \"Store\"."
       },
       {
-        name: "store",
+        name: "tienda",
         "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
         "button functions": [buyHealth, buyWeapon, goTown],
         text: "You enter the store."
@@ -55,11 +52,11 @@ button3.onclick = fightDragon;
 
 
 function update(location) {
-  text.innertext = location.text //Muestra el texto apropiado según la ubicación 
+  text.innerText = location.text //Muestra el texto apropiado según la ubicación 
   //Actualizar el texto de los botones 
-  button1.innertext = location["button text"][0]; 
-  button2.innertext = location["button text"][1]; 
-  button3.innertext = location["button text"][2];
+  button1.innerText = location["button text"][0]; 
+  button2.innerText = location["button text"][1]; 
+  button3.innerText = location["button text"][2];
   //Y su función  
   button1.onclick = location["button functions"][0]; 
   button2.onclick = location["button functions"][1]; 
@@ -86,15 +83,29 @@ function buyHealth() {
   if(rupias >= 10) {
     vida += 10; 
     rupias -= 10; 
-    textRupias.innertext = rupias; 
-    textVida.innertext = vida; 
+    textRupias.innerText = rupias; 
+    textVida.innerText = vida; 
   } else {
-    text.innertext = "No tienes suficientes rupias"; 
+    text.innerText = "No tienes suficientes rupias"; 
   }
 };
   
 function buyWeapon() {
-  
+  if (currentWeaponIndex < armas.length - 1) {  //si aun no tienes la última y mejor arma, espada maestra
+    if (rupas >= 30) {
+      rupias -= 30; 
+      currentWeaponIndex++; 
+      textRupias.innerText = rupias; 
+      let nuevaArma = arma[currentWeaponIndex].name; 
+      inventory.push(nuevaArma);//introducimos la nueva arma en el inventario para luego mostrarla por el text 
+      text.innerText += " En tu inventario tienes: " + inventory; 
+    } else {
+      text.innerText = "Rupias insuficientes";
+    }
+  } else { //si ya tienes las espada maestra 
+    text.innerText = "Ya tienes el arma más poderosa"; 
+    //TODO poder vender armas ??  
+  }
 };
 
 function vsBoko () {
@@ -103,4 +114,4 @@ function vsBoko () {
 
 function vsMoblin () {
 
-}
+}; 
